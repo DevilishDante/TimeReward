@@ -1,0 +1,115 @@
+# _____ _              _____                     _ #
+#|_   _|_|_____ ___   | __  |___ _ _ _ ___ ___ _| |#
+#  | | | |     | -_|  |    -| -_| | | | .'|  _| . |#
+#  |_| |_|_|_|_|___|  |__|__|___|_____|__,|_| |___|#
+
+VERSION: "1.1"
+prefix: "&8[&6&l!&r&8] &r"
+pnj_name: "&8❖ &6Aria &8❖"
+
+#                        #
+#       CMD SETTINGS     #
+#                        #
+
+#put the command without "/"
+#type %PLAYER% in the command
+
+rewards:
+  cmd_1: "cr give to %PLAYER% Journalier 1 offline"
+  cmd_2: "eco give %PLAYER% 250"
+  cmd_3: "nothinghere"
+
+#reward show in gui
+
+rewards_text:
+  text_1: "1 Clé Journalière"
+  text_2: "250 Hermines"
+  text_3: "A venir..."
+
+#Temps en heure
+
+rewards_time:
+  time_1: "24"
+  time_2: "72"
+  time_3: "0"
+
+
+#                          #
+#       SOUND SETTINGS     #
+#                          #
+
+sounds:
+  reward_yes: "ENTITY_VILLAGER_YES"
+  reward_no: "ENTITY_VILLAGER_NO"
+  open_gui: "BLOCK_WOODEN_DOOR_OPEN"
+  close_gui: "BLOCK_WOODEN_DOOR_CLOSE"
+
+
+#                         #
+#       MENU SETTINGS     #
+#                         #
+
+#set the color of the glasses
+
+deco:
+  dr_deco: ORANGE_STAINED_GLASS_PANE
+  dr_deco2: YELLOW_STAINED_GLASS_PANE
+
+Material:
+  unlock: CHEST_MINECART
+  lock: MINECART
+  noperm: BARRIER
+  incoming: TNT_MINECART
+
+#set the lore and names items
+
+menu:
+  back_name: "&4✖ &cRevenir en jeu ? &4✖"
+  book_name_1: "&8❖ &6Les Dons d'Aria &8❖"
+  book_lore_1:
+    - "&8➜ &eComment ça fonctionne ?"
+    - ""
+    - "&8➜ &7Il vous suffit de cliquer"
+    - "&8➜ &7Pour récuperer &ele Don"
+    - "&8➜ &7Souhaité, &aaprès &7ceci"
+    - "&8"
+    - "&8➜ &c&oil vous faudra attendre"
+    - "&8➜ &c&oQue le temps soit écoulé"
+    - "&8➜ &c&opour de nouveau les récupérer"
+
+  dr_name: 
+    unlocked: "&8▶ &eDon %TYPE%"
+    locked: "&4✖ &cDon indisponible &4✖"
+    incoming: "&8▶ &6Don à venir !"
+    noperm: "&4✖ &cDon bloquée &4✖"
+
+    name1: "Journalier"
+    name2: "Hebdomadaire"
+    name3: "nein"
+
+  dr_lore:
+    unlocked:
+      - "&8"
+      - "&8➜ &7Récupérable : &aOui &2✔"
+      - "&8➜ &7Cliquez pour &arécuperer ! &2✔"
+      - "&8&m                                    &r"
+      - "&8➜ &7Temps de récupération :"
+      - "&2✔ &a%REWARD_TIME% Heure(s) &2✔"
+      - "&8&m                                    &r"
+      - "&8➜ &7Type de don :"
+      - "&6✪ &e%REWARD_TEXT% &6✪"
+    locked:
+      - "&8"
+      - "&8➜ &7Récupérable : &cNon &4✖"
+      - "&8➜ &7Temps avant réinitialisation"
+      - "&6✪ &e%TIME% &6✪"
+    incoming:
+      - "&8"
+      - "&8➜ &7Ce don &earrivera"
+      - "&8➜ &7un petit &epeu de patience"
+    noperm:
+      - "&8"
+      - "&8➜ &7&oRécupérable : &cNon &4✖"
+      - "&8➜ &c&oPeut-être devriez-vous accomplir"
+      - "&8➜ &c&oun haut-fait pour la débloquer, peut"
+      - "&8➜ &c&o-être que c'est juste impossible c:"

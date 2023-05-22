@@ -1,0 +1,25 @@
+# _____ _              _____                     _ #
+#|_   _|_|_____ ___   | __  |___ _ _ _ ___ ___ _| |#
+#  | | | |     | -_|  |    -| -_| | | | .'|  _| . |#
+#  |_| |_|_|_|_|___|  |__|__|___|_____|__,|_| |___|#
+
+VERSION: "&7Plugin de &6Time Reward &7par &eDevilishDante &7Version &8➜ &61.0"
+RELOAD: "&7Les &6Time Reward &7sont maintenant &arechargés &7! &2✔"
+BAD_SYNTAX: "&cMauvaise syntaxe faites &4/tr help &cpour obtenir de l'aide !"
+CONSOLE_SENDER: "&cVous ne pouvez pas ouvrir de menu dans la console ! &4✖"
+REWARD_NO: "&cVous ne pouvez pas récuperer &8➜"
+REWARD_NO_2: "&4✖"
+REWARD_YES: "&7Vous recevez" 
+REWARD_YES_2: "... &2✔"
+NOPERM: "&cVous n'avez pas la permission !"
+NOT_ONLINE: "&4%PLAYER_ARG% &cn'est pas connecté ! &4✖"
+DEBUG_SUCCESS: "&aDons %REWARD_TYPE% &7de &2%PLAYER_ARG% &7réinitialisé ! &2✔"
+DEBUG_FAIL: "&cAucune donnée pour le joueur &4%PLAYER_ARG% ! &4✖"
+HELP: |-
+  &8&m                     &r&8<&6Time Reward&8>&m                     
+  &6 /tr debug [Pseudo] [journalier/hebdomadaire] 
+  &8➜ &7 Permet de remettre à zero un don !
+  &6 /tr reload &8➜ &7 Permet de recharger les Time Reward
+  &6 /tr info &8➜ &7 Permet de savoir la version du plugins
+  &6 /tr help &8➜ &7 Vous êtes dedans en ce moment même !
+  &8&m                     &r&8<&6Time Reward&8>&m                     

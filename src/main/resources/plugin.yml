@@ -1,0 +1,9 @@
+name: TimeReward
+authors: [DevilishDante]
+version: '1.0'
+api-version: 1.16
+main: fr.devilishdante.Ecaerios.TimeReward.TrCore
+commands:
+  TimeReward:
+    description: "commande principale"
+    aliases: [tr]
