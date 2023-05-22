@@ -14,13 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-
-public class TrCore extends JavaPlugin {
-    // public static HashMap<String, Integer> cooldownTime;
-    // public static HashMap<String, BukkitRunnable> cooldownTask;  
+public class TrCore extends JavaPlugin { 
     public TrPlayerManager tpm;
-    public static WorldGuardPlugin WorldGuardPlugin;
     public static TrCore instance;
     public static String prefix;
     public static String pnjname;
