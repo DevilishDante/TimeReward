@@ -1,6 +1,6 @@
 name: TimeReward
 authors: [DevilishDante]
-version: '1.0'
+version: '2.0'
 api-version: 1.16
 main: fr.devilishdante.Ecaerios.TimeReward.TrCore
 commands:

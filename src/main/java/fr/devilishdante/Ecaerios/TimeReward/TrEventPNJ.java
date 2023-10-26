@@ -1,5 +1,7 @@
 package fr.devilishdante.Ecaerios.TimeReward;
 
+import net.kyori.adventure.text.Component;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,7 +14,7 @@ public class TrEventPNJ implements Listener{
     public void DrRightClick(NPCRightClickEvent event){
         Player player = (Player)event.getClicker();
         String npc = event.getNPC().getRawName();
-        if (npc.equals(TrCore.convert(TrCore.pnjname))) {
+        if (TrCore.convert(npc).equals(TrCore.convert(TrCore.pnjname))) {
             new TrMenu().OpenMenu(player);
         }
     }
@@ -20,7 +22,7 @@ public class TrEventPNJ implements Listener{
     public void DrLeftClick(NPCLeftClickEvent event){
         Player player = (Player)event.getClicker();
         String npc = event.getNPC().getRawName();
-        if (npc.equals(TrCore.convert(TrCore.pnjname))) {
+        if (TrCore.convert(npc).equals(TrCore.convert(TrCore.pnjname))) {
             new TrMenu().OpenMenu(player);
         }
     }

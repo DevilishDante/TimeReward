@@ -12,6 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 
 public class TrCore extends JavaPlugin { 
@@ -29,7 +30,35 @@ public class TrCore extends JavaPlugin {
     public static Material drMaterial_open;
     public static Material drMaterial_incoming;
     public static Material drMaterial_noperm;
+    private void loader(String Ver,Boolean status){
+        String separator = "───────────────────────────────────────────────────";
+        String creator = "Créateur ➜ DevilishDante";
+        String activationMessage = "✔ Activation du système du pnj de reward ✔";
+        String desactivationMessage = "✖ Désactivation du système du pnj de reward ✖";
+        String emptyLine = "";
+        String[] graphicLogo = {
+                " _____ _              _____                     _ ",
+                "|_   _|_|_____ ___   | __  |___ _ _ _ ___ ___ _| |",
+                "  | | | |     | -_|  |    -| -_| | | | .'|  _| . |",
+                "  |_| |_|_|_|_|___|  |__|__|___|_____|__,|_| |___|"
+        };
 
+        Bukkit.getLogger().log(Level.INFO, separator);
+        Bukkit.getLogger().log(Level.INFO, emptyLine);
+        for (String line : graphicLogo) {
+            Bukkit.getLogger().log(Level.INFO, line);
+        }
+        Bukkit.getLogger().log(Level.INFO, emptyLine);
+        if (status) {
+            Bukkit.getLogger().log(Level.INFO, creator);
+            Bukkit.getLogger().log(Level.INFO, Ver);
+            Bukkit.getLogger().log(Level.INFO, activationMessage);
+        } else {
+            Bukkit.getLogger().log(Level.INFO, desactivationMessage);
+        }
+        Bukkit.getLogger().log(Level.INFO, emptyLine);
+        Bukkit.getLogger().log(Level.INFO, separator);
+    }
     @Override
     public void onEnable() {
         instance = this;
@@ -37,23 +66,13 @@ public class TrCore extends JavaPlugin {
         pnjname = instance.getConfig().getString("pnj_name");
         tpm = new TrPlayerManager();
         String version = instance.getConfig().getString("VERSION");
+        String versionInfo = "Version ➜ " + version;
+        loader(versionInfo,true);
+        drMaterial_close = Material.matchMaterial(Objects.requireNonNull(instance.getConfig().getString("Material.lock")));
+        drMaterial_open = Material.matchMaterial(Objects.requireNonNull(instance.getConfig().getString("Material.unlock")));
+        drMaterial_incoming = Material.matchMaterial(Objects.requireNonNull(instance.getConfig().getString("Material.incoming")));
+        drMaterial_noperm= Material.matchMaterial(Objects.requireNonNull(instance.getConfig().getString("Material.noperm")));
 
-        drMaterial_close = Material.matchMaterial(instance.getConfig().getString("Material.lock"));
-		drMaterial_open = Material.matchMaterial(instance.getConfig().getString("Material.unlock"));
-		drMaterial_incoming = Material.matchMaterial(instance.getConfig().getString("Material.incoming"));
-		drMaterial_noperm= Material.matchMaterial(instance.getConfig().getString("Material.noperm"));
-        Bukkit.getLogger().log(Level.INFO,"───────────────────────────────────────────────────"); 
-        Bukkit.getLogger().log(Level.INFO,""); 
-        Bukkit.getLogger().log(Level.INFO," _____ _              _____                     _ "); 
-        Bukkit.getLogger().log(Level.INFO,"|_   _|_|_____ ___   | __  |___ _ _ _ ___ ___ _| |"); 
-        Bukkit.getLogger().log(Level.INFO,"  | | | |     | -_|  |    -| -_| | | | .'|  _| . |"); 
-        Bukkit.getLogger().log(Level.INFO,"  |_| |_|_|_|_|___|  |__|__|___|_____|__,|_| |___|"); 
-        Bukkit.getLogger().log(Level.INFO,""); 
-        Bukkit.getLogger().log(Level.INFO,"Créateur ➜ DevilishDante"); 
-        Bukkit.getLogger().log(Level.INFO,"Version ➜ " + version);
-        Bukkit.getLogger().log(Level.INFO,"✔ Activation du système du pnj de reward ✔");
-        Bukkit.getLogger().log(Level.INFO,""); 
-        Bukkit.getLogger().log(Level.INFO,"───────────────────────────────────────────────────"); 
         PluginManager pm = this.getServer().getPluginManager();
         saveDefaultConfig();
         createCustomConfig();
@@ -61,21 +80,12 @@ public class TrCore extends JavaPlugin {
         pm.registerEvents(new TrEventMenu(),this);
         pm.registerEvents(new TrEventPNJ(),this);
         pm.registerEvents(new TrEventPlayerManager(),this);
-        getCommand("TimeReward").setExecutor(new TrCommands());
-        getCommand("TimeReward").setTabCompleter(new TrCommandsCompletion());
+        Objects.requireNonNull(getCommand("TimeReward")).setExecutor(new TrCommands());
+        Objects.requireNonNull(getCommand("TimeReward")).setTabCompleter(new TrCommandsCompletion());
     }
     @Override
     public void onDisable() {
-        Bukkit.getLogger().log(Level.INFO,"───────────────────────────────────────────────────"); 
-        Bukkit.getLogger().log(Level.INFO,""); 
-        Bukkit.getLogger().log(Level.INFO," _____ _              _____                     _ "); 
-        Bukkit.getLogger().log(Level.INFO,"|_   _|_|_____ ___   | __  |___ _ _ _ ___ ___ _| |"); 
-        Bukkit.getLogger().log(Level.INFO,"  | | | |     | -_|  |    -| -_| | | | .'|  _| . |"); 
-        Bukkit.getLogger().log(Level.INFO,"  |_| |_|_|_|_|___|  |__|__|___|_____|__,|_| |___|");
-        Bukkit.getLogger().log(Level.INFO,""); 
-        Bukkit.getLogger().log(Level.INFO,"✖ Désactivation du système du pnj de reward ✖");
-        Bukkit.getLogger().log(Level.INFO,""); 
-        Bukkit.getLogger().log(Level.INFO,"───────────────────────────────────────────────────"); 
+        loader("",false);
     }
     //Partie pour charger messages.yml
     public FileConfiguration getCustomConfig() {

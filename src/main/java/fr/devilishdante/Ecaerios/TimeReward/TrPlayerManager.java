@@ -1,10 +1,6 @@
 package fr.devilishdante.Ecaerios.TimeReward;
 
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TimeZone;
-import java.util.UUID;
+import java.util.*;
 // import java.text.SimpleDateFormat;
 
 import org.bukkit.Bukkit;
@@ -16,8 +12,8 @@ public class TrPlayerManager {
     private final Map<UUID, Calendar> Journalier;
     private final String header = "Users.";
 
-    private long seconds; 
-    private long minutes; 
+    private long seconds;
+    private long minutes;
     private long hours; 
     private long days; 
 
@@ -27,8 +23,7 @@ public class TrPlayerManager {
     }
 
     public Calendar DateSetup() {
-        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Paris"));
-        return cal;
+        return Calendar.getInstance(TimeZone.getTimeZone("Europe/Paris"));
     }
 
     private String nameByUUID(UUID id) {
@@ -39,7 +34,7 @@ public class TrPlayerManager {
 
     public void setCooldown(UUID player, String Type, Boolean conf, Calendar cal){
         String Pseudo = nameByUUID(player);
-        TrCore.UsersConfig.set(header+player.toString()+".Pseudo", Pseudo.toString());
+        TrCore.UsersConfig.set(header+player.toString()+".Pseudo", Objects.requireNonNull(Pseudo).toString());
         if (Type.equalsIgnoreCase("Journalier")) {
             Journalier.put(player, cal);
             if (conf) {
@@ -57,7 +52,7 @@ public class TrPlayerManager {
 
     public void DelCooldown(UUID player, String Type, Boolean conf){
         String Pseudo = nameByUUID(player);
-        TrCore.UsersConfig.set(header+player.toString()+".Pseudo", Pseudo.toString());
+        TrCore.UsersConfig.set(header+player.toString()+".Pseudo", Objects.requireNonNull(Pseudo).toString());
         if (Type.equalsIgnoreCase("journalier")) {
             Journalier.remove(player);
             if (conf) {
@@ -129,7 +124,7 @@ public class TrPlayerManager {
         if (Type.equalsIgnoreCase("Journalier")) {
             String t1 = TrCore.instance.getConfig().getString("rewards_time.time_1");
             Calendar Reward_millis = Journalier.get(player);
-            long timerM = Integer.parseInt(t1)*60*60*1000;
+            long timerM = (long) Integer.parseInt(Objects.requireNonNull(t1)) *60*60*1000;
             Long result = calcDiffTime(Reward_millis, player, timerM);
             if (result <= DateSetup().getTimeInMillis()) {
                 return true;
@@ -139,7 +134,7 @@ public class TrPlayerManager {
         } else if (Type.equalsIgnoreCase("Hebdomadaire")) {
             String t2 = TrCore.instance.getConfig().getString("rewards_time.time_2");
             Calendar Reward_millis = Hebdomadaire.get(player);    
-            long timerM = Integer.parseInt(t2)*60*60*1000;
+            long timerM = (long) Integer.parseInt(Objects.requireNonNull(t2)) *60*60*1000;
             Long result = calcDiffTime(Reward_millis, player, timerM);
             if (result <= DateSetup().getTimeInMillis()) {
                 return true;
@@ -153,41 +148,39 @@ public class TrPlayerManager {
 
     private String calcDiffTimeTxt(Calendar Reward_millis,UUID player, Long timer) {
         if (Reward_millis != null){
-            Long result_m = (Reward_millis.getTimeInMillis()+timer)-DateSetup().getTimeInMillis();
+            long result_m = (Reward_millis.getTimeInMillis()+timer)-DateSetup().getTimeInMillis();
             return PastTime(result_m);
         } else {
             return null;
         }
     }
     
-    private String PastTime (long timeInMillis) { 
-		long lTime =  timeInMillis/1000;
+    private String PastTime (long timeInMillis) {
+        long lTime =  timeInMillis/1000;
 
-		days = lTime / (24*60*60);  
+        days = lTime / (24*60*60);
         hours = (lTime-(days*86400))/3600;
         minutes = (lTime-((days*86400)+(hours*3600)))/60;
         seconds = (lTime-((days*86400)+(hours*3600)+(minutes*60)));
 
         if (timeInMillis <= 86400000L){
-		    return (hours+" heure(s) "+minutes+" minute(s) "+seconds+" sec");
-	    } else {
+            return (hours+" heure(s) "+minutes+" minute(s) "+seconds+" sec");
+        } else {
             return (days+"jour(s) "+hours+"heure(s) "+minutes+" min "+seconds+" sec");
         }
-	} 
+    }
 
     public String getDiffTimesMillisToDate(UUID player, String Type) {
         if (Type.equalsIgnoreCase("Journalier")) {
             String t1 = TrCore.instance.getConfig().getString("rewards_time.time_1");
             Calendar Reward_millis = Journalier.get(player);
-            long timerM = Integer.parseInt(t1)*60*60*1000;
-            String result = calcDiffTimeTxt(Reward_millis, player, timerM);
-            return result;
+            long timerM = (long) Integer.parseInt(Objects.requireNonNull(t1)) *60*60*1000;
+            return calcDiffTimeTxt(Reward_millis, player, timerM);
         } else if (Type.equalsIgnoreCase("Hebdomadaire")) {
             String t2 = TrCore.instance.getConfig().getString("rewards_time.time_2");
             Calendar Reward_millis = Hebdomadaire.get(player);    
-            long timerM = Integer.parseInt(t2)*60*60*1000;
-            String result = calcDiffTimeTxt(Reward_millis, player, timerM);
-            return result;
+            long timerM = (long) Integer.parseInt(Objects.requireNonNull(t2)) *60*60*1000;
+            return calcDiffTimeTxt(Reward_millis, player, timerM);
         } else {
             return null;
         }

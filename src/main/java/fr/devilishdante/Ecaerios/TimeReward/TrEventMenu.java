@@ -11,17 +11,12 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.UUID;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.TimeZone;
+import java.util.*;
 
 public class TrEventMenu implements Listener {
-    private TrPlayerManager tpm = TrCore.instance.tpm;
+    private final TrPlayerManager tpm = TrCore.instance.tpm;
     private void checkPerm (InventoryClickEvent event, String perm, int Slot, int Tr, Player player, Integer time, String Typr){
-        if (Typr != "incoming"){
+        if (!Objects.equals(Typr, "incoming")){
             if (event.getRawSlot() == Slot ){
                 if(player.hasPermission(perm)) {
                     UUID uuid = player.getUniqueId();
@@ -46,7 +41,7 @@ public class TrEventMenu implements Listener {
                             ItemStack DrItem = new ItemStack(TrCore.drMaterial_close,1);
                             ItemMeta DrMeta = DrItem.getItemMeta();
                             
-                            DrMeta.setDisplayName(TrCore.convert(drname));
+                            DrMeta.setDisplayName(TrCore.convert(Objects.requireNonNull(drname)));
                             DrMeta.setLore(TrCore.convertL(drlore_result));
                             DrItem.setItemMeta(DrMeta);
                             menu.setItem(Slot, DrItem);
@@ -62,7 +57,7 @@ public class TrEventMenu implements Listener {
                             Bukkit.dispatchCommand(console, cmd);
                             Inventory menu = event.getInventory();
                             String name_inv = event.getView().getTitle();
-    
+
                             if (!name_inv.contains(TrCore.pnjname)){
                                 String drname = TrCore.instance.getConfig().getString("menu.dr_name.locked");
                                 List<String> drlore = TrCore.instance.getConfig().getStringList("menu.dr_lore.locked");
@@ -73,7 +68,7 @@ public class TrEventMenu implements Listener {
                                 ItemStack DrItem = new ItemStack(TrCore.drMaterial_close,1);
                                 ItemMeta DrMeta = DrItem.getItemMeta();
                                 
-                                DrMeta.setDisplayName(TrCore.convert(drname));
+                                DrMeta.setDisplayName(TrCore.convert(Objects.requireNonNull(drname)));
                                 DrMeta.setLore(TrCore.convertL(drlore_result));
                                 DrItem.setItemMeta(DrMeta);
                                 menu.setItem(Slot, DrItem);
@@ -92,7 +87,7 @@ public class TrEventMenu implements Listener {
                                 for (String dr : drlore) {
                                     drlore_result.add(dr.replaceAll("%TIME%", tpm.getDiffTimesMillisToDate(uuid, Typr).toString()));
                                 }
-                                DrMeta.setDisplayName(TrCore.convert(drname));
+                                DrMeta.setDisplayName(TrCore.convert(Objects.requireNonNull(drname)));
                                 DrMeta.setLore(TrCore.convertL(drlore_result));
                                 DrItem.setItemMeta(DrMeta);
                                 menu.setItem(Slot, DrItem);
@@ -113,7 +108,7 @@ public class TrEventMenu implements Listener {
                             for (String dr : drlore) {
                                 drlore_result.add(dr.replaceAll("%TIME%", tpm.getDiffTimesMillisToDate(uuid, Typr).toString()));
                             }
-                            DrMeta.setDisplayName(TrCore.convert(drname));
+                            DrMeta.setDisplayName(TrCore.convert(Objects.requireNonNull(drname)));
                             DrMeta.setLore(TrCore.convertL(drlore_result));
                             DrItem.setItemMeta(DrMeta);
                             menu.setItem(Slot, DrItem);
@@ -136,9 +131,9 @@ public class TrEventMenu implements Listener {
             String t2 = TrCore.instance.getConfig().getString("rewards_time.time_2");
             String t3 = TrCore.instance.getConfig().getString("rewards_time.time_3");
             
-            checkPerm(event, "timereward.1", 11, 1, player, Integer.parseInt(t1), "journalier");
-            checkPerm(event, "timereward.2", 13, 2, player, Integer.parseInt(t2), "Hebdomadaire");
-            checkPerm(event, "timereward.3", 15, 3, player, Integer.parseInt(t3), "incoming");
+            checkPerm(event, "timereward.1", 11, 1, player, Integer.parseInt(Objects.requireNonNull(t1)), "journalier");
+            checkPerm(event, "timereward.2", 13, 2, player, Integer.parseInt(Objects.requireNonNull(t2)), "Hebdomadaire");
+            checkPerm(event, "timereward.3", 15, 3, player, Integer.parseInt(Objects.requireNonNull(t3)), "incoming");
 
             if (event.getRawSlot() == 22 ){
                 event.getWhoClicked().closeInventory();
