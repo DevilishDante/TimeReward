@@ -20,6 +20,14 @@ public class TrEventMenu implements Listener {
             if (event.getRawSlot() == Slot ){
                 if(player.hasPermission(perm)) {
                     UUID uuid = player.getUniqueId();
+                    
+                    
+                    //if (tpm.getCooldownAsId(uuid, Typr) && tpm.getDiffTimesMillis(uuid, Typr) || ) {
+                        
+                    //} else if () {
+                        
+                    //}
+
                     if (!tpm.getCooldownAsId(uuid, Typr)) {
                         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Paris"));
                         tpm.setCooldown(uuid, Typr, true, cal);
@@ -48,6 +56,7 @@ public class TrEventMenu implements Listener {
                         }
                     } else if (tpm.getCooldownAsId(uuid, Typr)){
                         if (tpm.getDiffTimesMillis(uuid, Typr)){
+                            
                             Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Paris"));
                             tpm.setCooldown(uuid, Typr, true, cal);
                             ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();

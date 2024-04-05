@@ -116,8 +116,7 @@ public class TrPlayerManager {
     }
 
     private Long calcDiffTime(Calendar Reward_millis,UUID player, Long timer){
-        Long result_m = Reward_millis.getTimeInMillis()+timer;
-        return result_m;
+        return Reward_millis.getTimeInMillis()+timer;
     }
 
     public Boolean getDiffTimesMillis(UUID player, String Type) {
@@ -126,21 +125,13 @@ public class TrPlayerManager {
             Calendar Reward_millis = Journalier.get(player);
             long timerM = (long) Integer.parseInt(Objects.requireNonNull(t1)) *60*60*1000;
             Long result = calcDiffTime(Reward_millis, player, timerM);
-            if (result <= DateSetup().getTimeInMillis()) {
-                return true;
-            } else {
-                return false;
-            }
+            return result <= DateSetup().getTimeInMillis();
         } else if (Type.equalsIgnoreCase("Hebdomadaire")) {
             String t2 = TrCore.instance.getConfig().getString("rewards_time.time_2");
             Calendar Reward_millis = Hebdomadaire.get(player);    
             long timerM = (long) Integer.parseInt(Objects.requireNonNull(t2)) *60*60*1000;
             Long result = calcDiffTime(Reward_millis, player, timerM);
-            if (result <= DateSetup().getTimeInMillis()) {
-                return true;
-            } else {
-                return false;
-            }
+            return result <= DateSetup().getTimeInMillis();
         } else {
             return false;
         }
@@ -185,7 +176,4 @@ public class TrPlayerManager {
             return null;
         }
     }
-
-
 }
- 

@@ -33,9 +33,9 @@ public class TrCommands implements CommandExecutor {
                 case "reload" -> {
                     if (player.hasPermission(TrCore.permAdmin)) {
                         String reload = TrCore.msgConfig.getString("RELOAD");
-                        TrCore.instance.reloadConfig();
                         TrCore.prefix = TrCore.instance.getConfig().getString("prefix");
                         TrCore.pnjname = TrCore.instance.getConfig().getString("pnj_name");
+                        TrCore.instance.reloadConfig();
                         TrCore.instance.reloadCustomConfig();
                         TrCore.instance.reloadUsersConfig();
                         TrCore.drMaterial_close = Material.matchMaterial(Objects.requireNonNull(TrCore.instance.getConfig().getString("Material.lock")));
