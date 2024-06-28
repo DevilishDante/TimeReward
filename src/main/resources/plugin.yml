@@ -2,7 +2,7 @@ name: TimeReward
 authors: [DevilishDante]
 version: '2.0'
 api-version: 1.16
-main: fr.devilishdante.Ecaerios.TimeReward.TrCore
+main: fr.devilishdante.ecaerios.TimeReward.TrCore
 commands:
   TimeReward:
     description: "commande principale"

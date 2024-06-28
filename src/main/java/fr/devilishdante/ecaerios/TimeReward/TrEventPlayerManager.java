@@ -1,4 +1,4 @@
-package fr.devilishdante.Ecaerios.TimeReward;
+package fr.devilishdante.ecaerios.TimeReward;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

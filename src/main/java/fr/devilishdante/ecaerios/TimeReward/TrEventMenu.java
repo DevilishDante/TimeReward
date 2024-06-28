@@ -1,4 +1,4 @@
-package fr.devilishdante.Ecaerios.TimeReward;
+package fr.devilishdante.ecaerios.TimeReward;
 
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.Bukkit;
@@ -20,21 +20,14 @@ public class TrEventMenu implements Listener {
             if (event.getRawSlot() == Slot ){
                 if(player.hasPermission(perm)) {
                     UUID uuid = player.getUniqueId();
-                    
-                    
-                    //if (tpm.getCooldownAsId(uuid, Typr) && tpm.getDiffTimesMillis(uuid, Typr) || ) {
-                        
-                    //} else if () {
-                        
-                    //}
+                    Calendar cal = getCalendar();
 
                     if (!tpm.getCooldownAsId(uuid, Typr)) {
-                        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Paris"));
                         tpm.setCooldown(uuid, Typr, true, cal);
                         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
                         String reward = TrCore.instance.getConfig().getString("sounds.reward_yes");
                         player.playSound(player.getLocation(),Sound.valueOf(reward), 1.0f,1.0f);
-                        String cmd = TrCore.instance.getConfig().getString("rewards.cmd_"+Tr).replace("%PLAYER%", player.getName()); 
+                        String cmd = Objects.requireNonNull(TrCore.instance.getConfig().getString("rewards.cmd_" + Tr)).replace("%PLAYER%", player.getName());
                         Bukkit.dispatchCommand(console, cmd);
                         Inventory menu = event.getInventory();
                         String name_inv = event.getView().getTitle();
@@ -56,8 +49,7 @@ public class TrEventMenu implements Listener {
                         }
                     } else if (tpm.getCooldownAsId(uuid, Typr)){
                         if (tpm.getDiffTimesMillis(uuid, Typr)){
-                            
-                            Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Paris"));
+
                             tpm.setCooldown(uuid, Typr, true, cal);
                             ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
                             String reward = TrCore.instance.getConfig().getString("sounds.reward_yes");
@@ -150,5 +142,8 @@ public class TrEventMenu implements Listener {
                 player.playSound(player.getLocation(),Sound.valueOf(closegui), 1.0f,1.0f);
             }
         }
+    }
+    private Calendar getCalendar(){
+        return Calendar.getInstance(TimeZone.getTimeZone("Europe/Paris"));
     }
 }

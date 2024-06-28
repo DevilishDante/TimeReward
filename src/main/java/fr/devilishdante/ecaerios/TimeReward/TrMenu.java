@@ -1,4 +1,4 @@
-package fr.devilishdante.Ecaerios.TimeReward;
+package fr.devilishdante.ecaerios.TimeReward;
 
 import java.util.List;
 import org.bukkit.Bukkit;
